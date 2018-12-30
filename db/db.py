@@ -1,6 +1,7 @@
 import MySQLdb
 import yaml
 import sys
+import os
 
 # this is a pointer to the module object instance itself.
 this = sys.modules[__name__]
@@ -8,12 +9,15 @@ this = sys.modules[__name__]
 # we can explicitly make assignments on it
 this.db = None
 this.dbcursor = None
-this.config = yaml.load(open('./config.yml'))['mysql']
+__location__ = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__)))
+this.config = yaml.load(open(os.path.join(__location__,'../config.yml')))['mysql']
 
 def open_db_connection():
     this.db = MySQLdb.connect(
       host=this.config['host'],
       user=this.config['user'],
+      passwd=this.config['pass'],
       db=this.config['database']
     )
     this.dbcursor = this.db.cursor(MySQLdb.cursors.DictCursor)

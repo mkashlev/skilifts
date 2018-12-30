@@ -3,10 +3,10 @@ USE ski_status;
 
 CREATE TABLE IF NOT EXISTS resorts (
   ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(127) NOT NULL UNIQUE,
-  url VARCHAR(127) NOT NULL,
-  parser varchar(127),
-  sub_parser varchar(127),
+  name VARCHAR(255) NOT NULL UNIQUE,
+  url VARCHAR(511) NOT NULL,
+  parser varchar(255),
+  sub_parser varchar(255),
   description TEXT,
   active TINYINT(1) NOT NULL DEFAULT 1
 );
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS resorts (
 CREATE TABLE IF NOT EXISTS lifts (
   ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   resort_id INT NOT NULL,
-  name VARCHAR(127) NOT NULL,
-  alt_name VARCHAR(127),
+  name VARCHAR(255) NOT NULL,
+  alt_name VARCHAR(255),
   description TEXT,
   current_status INT NOT NULL DEFAULT 0,
   UNIQUE(resort_id, name)
