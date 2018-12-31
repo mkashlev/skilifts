@@ -2,16 +2,20 @@ from db import db
 import sys
 
 print 'starting cron'
-resorts = db.query('SELECT id, parser, active FROM resorts')
+resorts = db.query('SELECT id, parser, weather_parser, active FROM resorts')
 parsers = set()
+weather_parsers = set()
 # get list of parsers
 for resort in resorts:
-    if resort['parser'] and resort['active']: parsers.add('parsers.'+resort['parser'])
+    if resort['active'] and resort['parser']: parsers.add('parsers.'+resort['parser'])
+    if resort['active'] and resort['weather_parser']: weather_parsers.add('weather.parsers.'+resort['weather_parser'])
 exec('import '+', '.join(parsers))
+exec('import '+', '.join(weather_parsers))
 
 print resorts
 print '-------'
 for resort in resorts:
+    #parse resort data
     if resort['active'] and resort['parser'] and 'parsers.'+resort['parser'] in sys.modules:
         print 'parsing resort id '+str(resort['id'])
         #populate lifts for the resort if not done already
@@ -21,4 +25,9 @@ for resort in resorts:
             eval(func_str)
         #add lift status for the resort
         func_str = 'parsers.'+resort['parser']+'.get_lift_status('+str(resort['id'])+')'
+        eval(func_str)
+    #parse weather data
+    if resort['active'] and resort['weather_parser'] and 'weather.parsers.'+resort['weather_parser'] in sys.modules:
+        print 'parsing weather for resort id '+str(resort['id'])
+        func_str = 'weather.parsers.'+resort['weather_parser']+'.get_weather_for_resort('+str(resort['id'])+')'
         eval(func_str)

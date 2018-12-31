@@ -1,5 +1,6 @@
 mysql:
   host: localhost
-  user: dmitry
-  pass: sonalsorises
+  user: root
   database: ski_status
+openweathermap:
+  appid: 632520ea9a32b52c1ebd772ce18808ac

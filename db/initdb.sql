@@ -3,19 +3,22 @@ USE ski_status;
 
 CREATE TABLE IF NOT EXISTS resorts (
   ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL UNIQUE,
+  name VARCHAR(127) NOT NULL UNIQUE,
   url VARCHAR(511) NOT NULL,
-  parser varchar(255),
-  sub_parser varchar(255),
+  parser VARCHAR(127),
+  sub_parser VARCHAR(127),
   description TEXT,
+  weather_parser VARCHAR(127)
+  geo_lat FLOAT(9,6),
+  geo_lon FLOAT(9,6),
   active TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS lifts (
   ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   resort_id INT NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  alt_name VARCHAR(255),
+  name VARCHAR(127) NOT NULL,
+  alt_name VARCHAR(127),
   description TEXT,
   current_status INT NOT NULL DEFAULT 0,
   UNIQUE(resort_id, name)
@@ -26,6 +29,29 @@ CREATE TABLE IF NOT EXISTS lift_status (
   lift_id INT NOT NULL,
   status INT NOT NULL DEFAULT 0,
   updated_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS weather_reports (
+  ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  source VARCHAR(127) NOT NULL,
+  label_id INT,
+  label VARCHAR(127),
+  description VARCHAR(127),
+  temperature FLOAT(7,4),
+  temperature_min FLOAT(7,4),
+  temperature_max FLOAT(7,4),
+  pressure INT,
+  humidity INT,
+  visibility INT,
+  wind_speed FLOAT(6,3),
+  wind_dir FLOAT(6,3),
+  cloudiness FLOAT(6,3),
+  rain_last_1h INT,
+  rain_last_3h INT,
+  snow_last_1h INT,
+  snow_last_3h INT,
+  data_calculated_at DATETIME,
+  updated_at DATETIME NOT NULL
 );
 
 --add trigger to update current_status whenever a status changes

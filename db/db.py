@@ -17,7 +17,7 @@ def open_db_connection():
     this.db = MySQLdb.connect(
       host=this.config['host'],
       user=this.config['user'],
-      passwd=this.config['pass'],
+      #passwd=this.config['pass'],
       db=this.config['database']
     )
     this.dbcursor = this.db.cursor(MySQLdb.cursors.DictCursor)
@@ -36,9 +36,13 @@ def query(query):
     res = this.dbcursor.fetchall()
     return res
 
-def execute(sql, val):
+def execute(sql, val=None):
     if not this.dbcursor: open_db_connection()
     try:
-        this.dbcursor.execute(sql, val)
-    except:
-        print 'error'
+        if val:
+            this.dbcursor.execute(sql, val)
+        else:
+            this.dbcursor.execute(sql)
+    except Exception as e:
+        print "Unexpected error:"
+        print e
