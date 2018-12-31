@@ -22,7 +22,8 @@ def get_weather_for_resort(resort_id):
 
     data_map = {
         'source': 'openweathermap',
-        'updated_at': time.strftime('%Y-%m-%d %H:%M:%S')
+        'updated_at': time.strftime('%Y-%m-%d %H:%M:%S'),
+        'resort_id': resort_id
     }
     if len(weather_data) > 0:
         if len(weather_data['weather']) > 0:
