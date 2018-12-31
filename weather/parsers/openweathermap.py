@@ -54,9 +54,6 @@ def get_weather_for_resort(resort_id):
             if snow['3h']: data_map['snow_last_3h'] = snow['3h']
         if 'dt' in weather_data: data_map['data_calculated_at'] = datetime.utcfromtimestamp(weather_data['dt']).strftime('%Y-%m-%d %H:%M:%S')
     cols = ','.join(data_map.keys())
-    print data_map
-    print cols
-    print data_map.values()
     vals = data_map.values()
     vals = tuple(vals)
     tmp = ','.join(['%s'] * len(vals))
