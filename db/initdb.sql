@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS resorts (
   weather_parser VARCHAR(127)
   geo_lat FLOAT(9,6),
   geo_lon FLOAT(9,6),
+  weather_gridpoint VARCHAR(127),
   active TINYINT(1) NOT NULL DEFAULT 1
 );
 
@@ -40,16 +41,30 @@ CREATE TABLE IF NOT EXISTS weather_reports (
   temperature FLOAT(7,4),
   temperature_min FLOAT(7,4),
   temperature_max FLOAT(7,4),
+  temperature_apparent FLOAT(7,4),
+  wind_chill FLOAT(7,4),
   pressure INT,
   humidity INT,
+  dewpoint FLOAT(8,5),
   visibility INT,
+  ceiling_height FLOAT(6,3),
+  sky_cover INT,
   wind_speed FLOAT(6,3),
   wind_dir FLOAT(6,3),
+  wind_gust FLOAT(6,3),
   cloudiness FLOAT(6,3),
   rain_last_1h INT,
   rain_last_3h INT,
   snow_last_1h INT,
   snow_last_3h INT,
+  rain_amount INT,
+  snow_amount INT,
+  snow_level FLOAT(9,4),
+  ice_amount INT,
+  precip_prob INT,
+  transport_wind_speed FLOAT(6,3),
+  transport_wind_dir FLOAT(6,3),
+  lightning_activity INT,
   data_calculated_at DATETIME,
   updated_at DATETIME NOT NULL
 );

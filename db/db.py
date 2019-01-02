@@ -17,7 +17,7 @@ def open_db_connection():
     this.db = MySQLdb.connect(
       host=this.config['host'],
       user=this.config['user'],
-      passwd=this.config['pass'],
+      # passwd=this.config['pass'],
       db=this.config['database']
     )
     this.dbcursor = this.db.cursor(MySQLdb.cursors.DictCursor)

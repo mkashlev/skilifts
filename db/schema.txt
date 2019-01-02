@@ -9,6 +9,7 @@ resorts
  -weather_parser
  -geo_lat
  -geo_lon
+ -weather_gridpoint
 
 lifts
  -id
@@ -33,16 +34,29 @@ weather
  -temperature
  -temperature_min
  -temperature_max
+ -temperature_apparent
+ -wind_chill
  -pressure
  -humidity
  -visibility
+ -ceiling_height
+ -sky_cover
  -wind_speed
  -wind_dir
+ -wind_gust
  -cloudiness
  -rain_last_1h
  -rain_last_3h
  -snow_last_1h
  -snow_last_3h
+ -precip_prob
+ -rain_amount
+ -ice_amount
+ -snow_amount
+ -snow_level
+ -transport_wind_speed
+ -transport_wind_dir
+ -lightning_activity
  -data_calculated_at
  -updated_at
 

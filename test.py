@@ -9,3 +9,6 @@ epic.get_lift_status(1)
 
 from weather.parsers import openweathermap
 openweathermap.get_weather_for_resort(1)
+
+from weather.parsers import nws
+nws.get_weather_for_resort(3)
