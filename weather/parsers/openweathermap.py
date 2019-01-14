@@ -3,12 +3,17 @@ import json
 import time
 import os
 import yaml
+import hiyapyco
 from db import db
 from datetime import datetime
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-config = yaml.load(open(os.path.join(__location__,'../../config.yml')))['openweathermap']
+nodeEnv = os.environ['NODE_ENV']
+config = hiyapyco.load(os.path.join(__location__,'../../config/default.yml'), os.path.join(__location__,'../../config/'+nodeEnv+'.yml'), method=hiyapyco.METHOD_MERGE, interpolate=True, failonmissingfiles=True)['openweathermap']
+
+#config = yaml.load(open(os.path.join(__location__,'../../config.yml')))['openweathermap']
+
 
 def get_weather_for_resort(resort_id):
     apikey = config['appid']
