@@ -3,13 +3,21 @@ import { gql } from 'apollo-server-express';
 // GraphQL: TypeDefs
 const TYPEDEFS = gql`
 type Query {
-    test_query: Test
-  }
-type Test {
-    test_field_1: String
-    test_field_2: Int
-    test_field_3: Boolean
-  }
+  resorts: [Resort!]
+  lifts(id: ID!): [Lift!]
+  resortsWithLifts: [Resort!]
+}
+type Resort {
+  id: ID
+  name: String
+  lifts: [Lift!]
+}
+type Lift {
+  id: ID
+  name: String
+  status: Int
+  resort_id: ID
+}
 `;
 // Exports
 export default TYPEDEFS;

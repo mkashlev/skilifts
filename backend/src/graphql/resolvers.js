@@ -1,13 +1,17 @@
-// Imports: Axios
-import axios from 'axios';
+import { getResorts, getLifts, getResortsWithLifts } from '../resorts'
 // GraphQL: Resolvers
-  const RESOLVERS = {
-    Query: {
-    test_query: (parent, args) => {
-      return axios.get(`www.apiurl.com/people`)
-      .then((response) => response.data)
-      .catch((error) => console.log(error))
-    }
+const RESOLVERS = {
+  Query: {
+    resorts: (parent, args) => {
+      return getResorts()
+    },
+    lifts: (parent, args) => {
+      return getLifts(args.id)
+    },
+    resortsWithLifts: (parent, args) => {
+      return getResortsWithLifts()
+    },
+
   }
 };
 // Exports
