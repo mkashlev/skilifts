@@ -6,6 +6,7 @@ type Query {
   resorts: [Resort!]
   lifts(id: ID!): [Lift!]
   resortsWithLifts: [Resort!]
+  lift(id: ID!): Lift
 }
 type Resort {
   id: ID
@@ -17,6 +18,7 @@ type Lift {
   name: String
   status: Int
   resort_id: ID
+  historical_status: String
 }
 `;
 // Exports

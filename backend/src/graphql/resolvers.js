@@ -1,4 +1,4 @@
-import { getResorts, getLifts, getResortsWithLifts } from '../resorts'
+import { getResorts, getLifts, getResortsWithLifts, getLift } from '../resorts'
 // GraphQL: Resolvers
 const RESOLVERS = {
   Query: {
@@ -11,6 +11,9 @@ const RESOLVERS = {
     resortsWithLifts: (parent, args) => {
       return getResortsWithLifts()
     },
+    lift: (parent, args) => {
+      return getLift(args.id)
+    }
 
   }
 };
