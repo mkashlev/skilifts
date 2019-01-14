@@ -2,6 +2,7 @@ import MySQLdb
 import yaml
 import sys
 import os
+import hiyapyco
 
 # this is a pointer to the module object instance itself.
 this = sys.modules[__name__]
@@ -11,14 +12,16 @@ this.db = None
 this.dbcursor = None
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-this.config = yaml.load(open(os.path.join(__location__,'../config.yml')))['mysql']
+nodeEnv = os.environ['NODE_ENV']
+this.config = hiyapyco.load(os.path.join(__location__,'../config/default.yml'), os.path.join(__location__,'../config/'+nodeEnv+'.yml'), method=hiyapyco.METHOD_MERGE, interpolate=True, failonmissingfiles=True)
+this.mysqlconfig = this.config['mysql']
 
 def open_db_connection():
     this.db = MySQLdb.connect(
-      host=this.config['host'],
-      user=this.config['user'],
-      passwd=this.config['pass'],
-      db=this.config['database']
+      host=this.mysqlconfig['host'],
+      user=this.mysqlconfig['user'],
+      passwd=this.mysqlconfig['pass'],
+      db=this.mysqlconfig['database']
     )
     this.dbcursor = this.db.cursor(MySQLdb.cursors.DictCursor)
 
