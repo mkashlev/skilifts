@@ -16,8 +16,9 @@ exports.getLifts = (resortId) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * from lifts where resort_id='+resortId).then( rows => {
       //console.log(rows.map(row => row.name))
+      const status = ['closed', 'running', 'hold', 'scheduled']
       return resolve(rows.map(row => {
-        return { id: row.id, name: row.name }
+        return { id: row.id, name: row.name, status_desc: status[row.current_status] }
       }))
     })
   })

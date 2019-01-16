@@ -17,6 +17,7 @@ type Lift {
   id: ID
   name: String
   status: Int
+  status_desc: String
   resort_id: ID
   historical_status: String
 }
