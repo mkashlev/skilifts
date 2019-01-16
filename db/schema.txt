@@ -18,6 +18,7 @@ lifts
  -alt_name
  -current_status
  -description
+ -updated_at
 
 lift_status
  -id

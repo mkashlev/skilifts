@@ -20,6 +20,7 @@ type Lift {
   status_desc: String
   resort_id: ID
   historical_status: String
+  updated_at: String
 }
 `;
 // Exports

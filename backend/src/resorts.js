@@ -18,7 +18,7 @@ exports.getLifts = (resortId) => {
       //console.log(rows.map(row => row.name))
       const status = ['closed', 'running', 'hold', 'scheduled']
       return resolve(rows.map(row => {
-        return { id: row.id, name: row.name, status: row.current_status, status_desc: status[row.current_status] }
+        return { id: row.id, name: row.name, status: row.current_status, status_desc: status[row.current_status], updated_at: row.updated_at }
       }))
     })
   })

@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS lifts (
   alt_name VARCHAR(127),
   description TEXT,
   current_status INT NOT NULL DEFAULT 0,
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
   UNIQUE(resort_id, name)
 );
 
