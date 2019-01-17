@@ -18,18 +18,30 @@ exports.getLifts = (resortId) => {
       //console.log(rows.map(row => row.name))
       const status = ['closed', 'running', 'hold', 'scheduled']
       return resolve(rows.map(row => {
-        return { id: row.id, name: row.name, status: row.current_status, status_desc: status[row.current_status], updated_at: new Date(row.updated_at) }
+        return { id: row.id, name: row.name, status: row.current_status, status_desc: status[row.current_status], updated_at: (new Date(row.updated_at)).toString() }
       }))
     })
   })
 }
 
+// exports.getLift = (liftId) => {
+//   return new Promise((resolve, reject) => {
+//     db.query('SELECT l.name, s.lift_id, GROUP_CONCAT(s.status SEPARATOR "") as historical_status from lifts l, lift_status s where l.id = s.lift_id and s.lift_id='+liftId+' GROUP BY lift_id;').then( rows => {
+//       //console.log(rows.map(row => row.name))
+//       const row = rows[0]
+//       return resolve({ id: row.lift_id, name: row.name, historical_status: row.historical_status })
+//     })
+//   })
+// }
 exports.getLift = (liftId) => {
   return new Promise((resolve, reject) => {
-    db.query('SELECT l.name, s.lift_id, GROUP_CONCAT(s.status SEPARATOR "") as historical_status from lifts l, lift_status s where l.id = s.lift_id and s.lift_id='+liftId+' GROUP BY lift_id;').then( rows => {
+    db.query('SELECT l.name, s.lift_id, s.status as historical_status from lifts l, lift_status s where l.id = s.lift_id and s.lift_id='+liftId+';').then( rows => {
       //console.log(rows.map(row => row.name))
       const row = rows[0]
-      return resolve({ id: row.lift_id, name: row.name, historical_status: row.historical_status })
+      const name = row.name
+      const id = row.lift_id
+      const hist_status = rows.map(row => row.historical_status).join('')
+      return resolve({ id: row.lift_id, name: row.name, historical_status: hist_status })
     })
   })
 }
