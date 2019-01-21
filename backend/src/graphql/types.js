@@ -7,6 +7,7 @@ type Query {
   lifts(id: ID!): [Lift!]
   resortsWithLifts: [Resort!]
   lift(id: ID!): Lift
+  weatherForResort(id: ID!, from: String, to: String): [Weather!]
 }
 type Resort {
   id: ID
@@ -21,6 +22,20 @@ type Lift {
   resort_id: ID
   historical_status: String
   updated_at: String
+}
+type Weather {
+  id: ID
+  resort_id: ID
+  source: String
+  data_calculated_at: String
+  label: String
+  description: String
+  temperature: String
+  pressure: Int
+  humidity: Int
+  wind_speed: Float
+  wind_dir: Float
+
 }
 `;
 // Exports

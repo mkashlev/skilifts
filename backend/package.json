@@ -12,6 +12,7 @@
     "graphql-tools": "^4.0.3",
     "js-yaml": "^3.12.1",
     "merge-yaml": "^1.0.0",
+    "moment": "^2.23.0",
     "mysql": "^2.16.0"
   },
   "devDependencies": {
