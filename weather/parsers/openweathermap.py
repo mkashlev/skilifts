@@ -9,7 +9,7 @@ from datetime import datetime
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-nodeEnv = os.environ['NODE_ENV']
+nodeEnv = os.environ['NODE_ENV'] if 'NODE_ENV' in os.environ else 'dev'
 config = hiyapyco.load(os.path.join(__location__,'../../config/default.yml'), os.path.join(__location__,'../../config/'+nodeEnv+'.yml'), method=hiyapyco.METHOD_MERGE, interpolate=True, failonmissingfiles=True)['openweathermap']
 
 #config = yaml.load(open(os.path.join(__location__,'../../config.yml')))['openweathermap']
@@ -38,11 +38,11 @@ def get_weather_for_resort(resort_id):
             if 'description' in weather: data_map['description'] = weather['description']
         if 'main' in weather_data:
             main = weather_data['main']
-            if 'temp' in main: data_map['temperature'] = main['temp']
+            if 'temp' in main: data_map['temperature'] = (main['temp'] - 273.15) #kelvin->centigrade
             if 'pressure' in main: data_map['pressure'] = main['pressure']
             if 'humidity' in main: data_map['humidity'] = main['humidity']
-            if 'temp_min' in main: data_map['temperature_min'] = main['temp_min']
-            if 'temp_max' in main: data_map['temperature_max'] = main['temp_max']
+            if 'temp_min' in main: data_map['temperature_min'] = (main['temp_min'] - 273.15) #kelvin->centigrade
+            if 'temp_max' in main: data_map['temperature_max'] = (main['temp_max'] - 273.15) #kelvin->centigrade
         if 'visibility' in weather_data: data_map['visibility'] = weather_data['visibility']
         if 'wind' in weather_data:
             wind = weather_data['wind']
